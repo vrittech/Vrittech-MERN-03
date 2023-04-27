@@ -1,0 +1,18 @@
+.text-input{
+    padding: 5px;
+}
+.submit-btn{
+    background-color: green;
+    color: white;
+    padding: 5px;
+    border: 1px solid green;
+}
+
+/* advance targeting 
+variables 
+box sizing 
+padding maring 
+size unit 
+position
+flex 
+grid  */

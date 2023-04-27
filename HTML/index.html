@@ -91,6 +91,60 @@
     <h2>EURO &euro;</h2>
     <h1>
         समाचार</h1>
+
+        <!-- FORM  -->
+        <form>
+            <div>
+                <label for="f_name">First name</label>
+            <input type="text" name="f_name" id="f_name" placeholder="john" required>
+            </div>
+            <br>
+            <div>
+                <label for="l_name">Last Name</label>
+                <input type="text" name="l_name" id="l_name" required placeholder="doe">
+            </div>
+            <br>
+            <div>
+                <label for="email">Last Name</label>
+                <input type="email" name="l_name" id="email" required placeholder="example@gmail.com">
+            </div>
+            <br>
+            <div>
+                <label for="pass">Password</label>
+                <input type="password" name="pas" id="pass" required maxlength="10" >
+            </div>
+            
+            <br>
+
+            <div>
+                <label for="location">Location</label>
+                <select name="location" id="location">
+                    <option>--SELCT YOUR LOCATION--</option>
+                    <option value="kat">Kathmandu</option>
+                    <option value="pokh">Pokhara</option>
+                    <option value="nepg">Nepaljung</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="male">Male</label>
+                <input type="radio" name="gender" id="male" value="male">
+
+                <label for="female">Femlae</label>
+                <input type="radio" name="gender" id="female" value="female">
+            </div>
+            <br>
+            <div>
+                <label for="terms">Terms and conditions</label>
+                <input type="checkbox" name="terms" id="terms">
+            </div>
+            <div>
+                <label for="message"></label>
+                <textarea name="message" id="message" cols="30" rows="10" placeholder="Write your message here....."></textarea>
+            </div>
+            <input type="submit" value="submit form">
+            <input type="reset" value="Clear form">
+        </form>
 </body>
 
 </html>
