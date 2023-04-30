@@ -3,10 +3,33 @@
 }
 .submit-btn{
     background-color: green;
-    color: white;
+    color: rgba(255, 180, 0,1);
     padding: 5px;
     border: 1px solid green;
 }
+
+p{
+    /* border-style: dashed;
+    border-width: 3px;
+    border-color: blueviolet;
+    border-radius: 10px; */
+    /* border: solid 2px red; */
+    /* border-width: 1px 20px 20px 3px; */
+    /* border-top-width: 20px;
+    border-bottom-width:1px; */
+    /* border-radius: 10px;
+    borde
+    margin-top: 120px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 40px; */
+    /* margin: 20px 120px; */
+    /* padding: 20px 5px; */
+}
+
+
+
+/* commenting   */
 
 /* advance targeting 
 variables 
@@ -16,3 +39,34 @@ size unit
 position
 flex 
 grid  */
+.parent{
+    background-color: lightgray;
+    /* padding: 40px; */
+    display:  flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+.card-parent{
+    /* display: inline-block; */
+    /* display: none; */
+    background-color: white;
+    width: 20%;
+    text-align: center;
+    padding: 20px 0px;
+    /* border-radius: 10px; */
+    
+}
+.card-parent h4 {
+    /* border: solid 1px blue; */
+    margin-top: -10px;
+}
+
+nav {
+     display: flex;
+     justify-content: space-between;
+     padding: 20px;
+     background-color: lightblue;
+}
+
