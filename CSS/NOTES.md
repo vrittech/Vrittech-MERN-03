@@ -109,6 +109,39 @@ Examples of inline elements:
 - <img>
 ```
 
+### diplay:flex;
+````
+The CSS property flex is used to align items within a container in a unidirectional manner, either horizontally or vertically. It provides a flexible and responsive layout for web pages, allowing elements to adjust to different screen sizes and orientations. By applying the flex property to a container, its child elements can be arranged in a row or a column, depending on the chosen flex-direction. The flex-wrap property determines whether the elements should wrap to a new line if they exceed the available space. Using the justify-content and align-items properties, the horizontal and vertical alignment of the elements within the container can be controlled, respectively. In summary, the flex property plays a crucial role in creating dynamic and adaptable layouts for modern web design.
+````
+The flex container properties are:
+- flex-direction
+- flex-wrap
+- justify-content
+- align-items
+- align-content
+
+
+### display:grid;
+The CSS Grid Layout Module offers a grid-based layout system, with rows and columns, making it easier to design web pages without having to use floats and positioning.
+- The vertical lines of grid items are called columns.
+- The horizontal lines of grid items are called rows.
+- The spaces between each column/row are called gaps.
+    - column-gap
+    - row-gap
+    - gap
+
+- Grid Lines : 
+    - grid-column-start: 1;
+    - grid-column-ends:3;
+
+
+
+
+
+
+
+
+
 #### display:none;
 display: none; is commonly used with JavaScript to hide and show elements without deleting and recreating them.
 

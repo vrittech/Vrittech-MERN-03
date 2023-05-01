@@ -41,22 +41,44 @@ flex
 grid  */
 .parent{
     background-color: lightgray;
-    /* padding: 40px; */
-    display:  flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    padding: 40px;
+    display:  grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    row-gap: 20px;
+    column-gap: 20px;
+    /* flex-wrap: wrap;
     justify-content: space-between;
+    align-items: baseline; */
+    overflow-y: auto;
 
 }
 .card-parent{
     /* display: inline-block; */
     /* display: none; */
     background-color: white;
-    width: 20%;
     text-align: center;
     padding: 20px 0px;
     /* border-radius: 10px; */
+   
     
+}
+.card-parent:nth-child(3){
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+.card-parent:nth-child(4){
+    grid-row-start: 1;
+    grid-column-start: 3;
+}
+.card-parent:nth-child(5){
+    grid-row-start: 2;
+    grid-column-start: 1;
+}
+.card-parent:nth-child(6){
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-row-end: 4;
 }
 .card-parent h4 {
     /* border: solid 1px blue; */
