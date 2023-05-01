@@ -43,8 +43,8 @@ grid  */
     background-color: lightgray;
     padding: 40px;
     display:  grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: auto auto auto;
+    /* grid-template-rows: auto; */
     row-gap: 20px;
     column-gap: 20px;
     /* flex-wrap: wrap;
@@ -56,6 +56,7 @@ grid  */
 .card-parent{
     /* display: inline-block; */
     /* display: none; */
+
     background-color: white;
     text-align: center;
     padding: 20px 0px;
@@ -63,23 +64,27 @@ grid  */
    
     
 }
+
 .card-parent:nth-child(3){
     grid-column-start: 2;
     grid-column-end: 4;
 }
+
 .card-parent:nth-child(4){
     grid-row-start: 1;
     grid-column-start: 3;
 }
+
 .card-parent:nth-child(5){
     grid-row-start: 2;
     grid-column-start: 1;
 }
-.card-parent:nth-child(6){
+
+/* .card-parent:nth-child(6){
     grid-row-start: 2;
     grid-column-start: 1;
     grid-row-end: 4;
-}
+}  */
 .card-parent h4 {
     /* border: solid 1px blue; */
     margin-top: -10px;
@@ -90,5 +95,87 @@ nav {
      justify-content: space-between;
      padding: 20px;
      background-color: lightblue;
+}
+
+.parent-grid{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+.grid-child:nth-child(1){
+    padding: 10px;
+    text-align: center;
+    background-color: aqua;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+.grid-child:nth-child(2){
+    padding: 10px;
+    text-align: center;
+    background-color: aquamarine;
+    grid-row-start: 2;
+    grid-row-end: 5;
+}
+.grid-child:nth-child(3){
+    background-color: rgb(50, 178, 178);
+    text-align: center;
+    grid-column-start: 2;
+    grid-column-end: 5;
+    height: 40rem;
+}
+.grid-child:nth-child(4){
+    background-color: blue;
+    height: 80px;
+}
+.grid-child:nth-child(5){
+    background-color: brown;
+}
+.grid-child:nth-child(6){
+    background-color: green;
+}
+.grid-child:nth-child(7){
+    background-color: gray;
+    grid-column-start: 2;
+    grid-column-end: 5;
+    height: 80px;
+}
+
+.nav{
+    background-color: royalblue;
+}
+.main-parent{
+    display: flex;
+}
+.sidebar{
+    background-color: aqua;
+    width: 20%;
+}
+.main-content{
+    background-color: brown;
+    width: 80%;
+}
+.content-parent{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.content-1{
+    background-color: white;
+    width: 100%;
+}
+
+.content-2{
+    background-color: royalblue;
+    width: 100%;
+}
+.content-3{
+    background-color: blue;
+    width: 100%;
+}
+
+.position {
+border: 1px solid black;
+position: sticky;
+top: 0px;
+background-color: white;
 }
 
