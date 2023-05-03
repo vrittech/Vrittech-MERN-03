@@ -1,0 +1,22 @@
+.box1{
+    background-color: blue;
+    height: 100px;
+    width: 100px;
+}
+ body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+ .box1{
+    margin: 20px;
+ }
+.box2{
+    background-color: brown;
+    height: 100px;
+    width: 100px;
+    border: 20px red solid;
+    padding: 20px;
+    box-sizing: content-box;
+    margin: 30px;
+}

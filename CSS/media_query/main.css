@@ -1,0 +1,57 @@
+h1{
+    color: red;
+}
+.grid{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto;
+}
+.grid1{
+    background-color: red;
+}
+.grid2{
+    background-color: blue;
+}
+.flex{
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+}
+.flex div {
+     background-color: green;
+     height: 40px;
+     width: 100%;
+}
+@media  screen and (min-width: 480px){
+    .grid{
+        grid-template-columns: auto auto;
+    }
+  
+    
+}
+
+@media  screen and (min-width: 840px){
+    .grid{
+        grid-template-columns: auto auto auto;
+    }
+    .flex{
+        flex-direction: row;
+    }
+    .flex div{
+        height: 120px;
+        border-radius: 20px;
+    }
+}
+
+@media  screen and (min-width: 1240px){
+    .grid{
+        grid-template-columns: auto auto auto auto;
+    }
+    .grid2{
+        background-color: blueviolet;
+    }
+}
