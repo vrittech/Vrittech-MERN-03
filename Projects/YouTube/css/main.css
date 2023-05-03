@@ -1,0 +1,122 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: darkslategray;
+}
+.top-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+.logo-section{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.searchbar{
+    display: flex;
+    align-items: center;
+}
+.search-input{
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    border-radius: 20px;
+    overflow: hidden;
+
+}
+.searchbar input{
+    padding: 10px 15px;
+    width: 30vw;
+    height: 20px;
+    border: none;
+
+    border-radius: 20px 0 0 20px;
+
+}
+.search_icons{
+    height: 40px;
+    display: flex;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 0 20px 20px 0; */
+}
+.profile-section{
+    display: flex;
+    align-items: center;
+}
+.profile-section .user_avatar{
+        height: 40px;
+        width: 40px;
+        background-color: green;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+} 
+
+.main{
+    display: flex;
+    align-items: flex-start;
+    padding: 0 10px;
+
+}
+.main-left{
+    width: 20%;
+    height: 100vh;
+    /* background-color: green; */
+    /* padding: 20px; */
+}
+.menu-items{
+    display: flex;
+    align-items: center;
+    /* background-color: gray; */
+     padding: 5px 10px;
+     border-radius: 1rem;
+     gap:10px
+}
+.main-right{
+    width: 80%;
+    padding:10px;
+    box-sizing: border-box;
+}
+.video-categories{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.videos-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 1vh 1vw;
+    overflow-x: hidden;
+}
+.video-thumbnail{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.video-details{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+.video-creator-thumbnail{
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.video-details div {
+    padding: 0 20px;
+    width: 100%;
+}
+.video-details div h2{
+    margin-top: -4px;
+
+}
