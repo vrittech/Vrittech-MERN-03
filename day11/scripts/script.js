@@ -113,6 +113,51 @@ console.log(columnNames);
 
 //Prime numbers 3,5,7,13,11
 //Palindrome 1221 madam
+let isPrime = true;
+// const isPrimeNum = (number) => {
+//    if (number < 2) {
+//       return;
+//    } else {
+//       for (let i = 2; i < number; i++) {
+//          if (number % i === 0) {
+//             isPrime = false;
+//             break;
+//          }
+//       }
+
+//       if (isPrime) console.log('Is a prime');
+//       else console.log('not a prime num')
+//    }
+// }
+
+// isPrimeNum(7);
+
+const checkPalidrom = (num) => {
+   // const str = num.toString();
+   // let newStr = '';
+
+   // for (let i = str.length - 1; i >= 0; i--) {
+   //    newStr += str[i];
+   // }
+
+
+   // if (Number(newStr) === num) {
+   //    console.log('palindrome');
+   // } else {
+   //    console.log('not palidrome');
+   // }
+
+   let reverse = 0;
+   let original = num;
+
+   while (original > 0) {
+      let rem = original % 10;
+      reverse = reverse * 10 + rem;
+      original = Math.floor(original / 10);
+   }
+}
+
+checkPalidrom(1021)
 
 
 
