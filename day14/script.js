@@ -107,7 +107,7 @@ labelValue.addEventListener('keyup', (event) => {
          input.value = label;
       }
 
-      div.appendChild(input)
+      div.appendChild(input);
 
       form.append(div);
 

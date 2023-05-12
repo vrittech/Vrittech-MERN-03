@@ -649,7 +649,7 @@ products.forEach((product) => {
 
 })
 
-container.append(unorderList);
+document.body.append(unorderList);
 
 
 
