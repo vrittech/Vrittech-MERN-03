@@ -129,8 +129,12 @@ function displayTodos() {
          todoId = todo.id;
          localStorage.setItem("todoId", todo.id)
          sessionStorage.setItem("todoId", todo.id)
-      })
 
+         //value fetch from local/session storage
+         const data = localStorage.getItem("todoId");
+         localStorage.removeItem("todoId")
+         const data1 = sessionStorage.getItem("todoId");
+      })
 
       rightDiv.append(editButton);
       //Delete button
