@@ -1,6 +1,6 @@
-const ButtonDisplay = (props) => {
-  console.log("here from app", props);
-  return <button>{props.value}</button>;
+const ButtonDisplay = ({ value }) => {
+  // console.log("here from app", value);
+  return <button>{value}</button>;
 };
 
 export default ButtonDisplay;

@@ -1,9 +1,13 @@
+import ListGroupComp from "./ListGroup";
+import ListGroup from "react-bootstrap/ListGroup";
+
 const ListStudents = (props) => {
   return (
-    <ul>
-      <li>{props.students[0]}</li>
-      <li>{props.students[1]}</li>
-    </ul>
+    <ListGroup>
+      {props.students.map((student) => {
+        return <ListGroupComp key={student} student={student} />;
+      })}
+    </ListGroup>
   );
 };
 
