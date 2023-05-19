@@ -4,10 +4,13 @@
 //     <h1>Hello react from vrit</h1>
 //   )
 // }
-
+import React, { useEffect, useState } from 'react'
 import ButtonDisplay from "./components/ButtonDisplay";
 import ListStudents from "./components/ListStudents";
 import ProductLister from "./components/ProductLister";
+import { Routes, Route } from "react-router-dom";
+import { PagenotFound } from "./pages/PagenotFound";
+import Counter from './components/Counter';
 
 // component name - PascalCase
 
@@ -16,6 +19,10 @@ import ProductLister from "./components/ProductLister";
 //JSX - Javascript XML
 const AppComponent = () => {
   // JSX
+  // BASIC HOOK
+  // useState --react hooks
+
+
   const students = ['Samrat', 'Roshan', 'raaz', 'roshan'];
   const products = [
     {
@@ -578,15 +585,22 @@ const AppComponent = () => {
   //props data passing from parent to child component
   return (
     <>
-
+      {/* <BrowserRouter> */}
+      <Routes>
+        <Route path="/" element={<ProductLister products={products} />} />
+        <Route path="/students" element={<ListStudents students={students} />} />
+        <Route path="/counter" element={<Counter />} />
+        <Route path="*" element={<PagenotFound products={products} />} />
+      </Routes>
+      {/* </BrowserRouter> */}
+      {/* <h1>Hello react from vrit</h1> */}
       {/* <ListStudents students={students} /> */}
-      <h1>Hello react from vrit</h1>
       {/* tags */}
       {/* <ButtonDisplay value="Register" test={students} />
       <ButtonDisplay value="Submit" /> */}
       {/* <input onChange={handleChange}/> */}
 
-      <ProductLister products={products} />
+      {/* <ProductLister products={products} /> */}
 
     </>
   )
