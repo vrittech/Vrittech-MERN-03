@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import { Card } from "react-bootstrap";
 
-const ProductLister = ({ products }) => {
+const ProductLister = ({ products, editHandler }) => {
   return (
     <div className="d-flex flex-wrap justify-content-evenly">
       {products.map((prod) => {
@@ -16,7 +16,9 @@ const ProductLister = ({ products }) => {
                   ? prod.description.slice(0, 25) + "..."
                   : prod.description}
               </Card.Text>
-              <Button variant="primary">View product</Button>
+              <Button variant="primary" onClick={editHandler}>
+                Edit product
+              </Button>
             </Card.Body>
           </Card>
         );

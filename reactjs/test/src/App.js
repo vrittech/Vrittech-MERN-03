@@ -11,6 +11,7 @@ import ProductLister from "./components/ProductLister";
 import { Routes, Route } from "react-router-dom";
 import { PagenotFound } from "./pages/PagenotFound";
 import Counter from './components/Counter';
+import { editHandler } from './helpers/edit.service';
 
 // component name - PascalCase
 
@@ -578,16 +579,22 @@ const AppComponent = () => {
       ]
     }
   ]
+
+  const [prods, setProds] = useState(products)
   // const handleSubmit = () => {
   //   console.log('clicked')
   // }
   // parent - child
   //props data passing from parent to child component
+  const testHandler = () => {
+    editHandler(setProds);
+  }
+
   return (
     <>
       {/* <BrowserRouter> */}
       <Routes>
-        <Route path="/" element={<ProductLister products={products} />} />
+        <Route path="/" element={<ProductLister products={prods} editHandler={testHandler} />} />
         <Route path="/students" element={<ListStudents students={students} />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="*" element={<PagenotFound products={products} />} />
