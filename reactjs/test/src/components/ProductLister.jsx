@@ -1,29 +1,19 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import { Card } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 
-const ProductLister = ({ products, editHandler }) => {
+import Product from "./Product";
+import { getData } from "../services/axios.service";
+import { PRODUCTS_URL } from "../constants/api.constants";
+
+const ProductLister = ({ prods }) => {
   return (
-    <div className="d-flex flex-wrap justify-content-evenly">
-      {products.map((prod) => {
-        return (
-          <Card key={prod.id} style={{ width: "18rem" }}>
-            <Card.Img variant="top" className="h-50" src={prod.thumbnail} />
-            <Card.Body>
-              <Card.Title>{prod.title}</Card.Title>
-              <Card.Text>
-                {prod.description.length > 25
-                  ? prod.description.slice(0, 25) + "..."
-                  : prod.description}
-              </Card.Text>
-              <Button variant="primary" onClick={editHandler}>
-                Edit product
-              </Button>
-            </Card.Body>
-          </Card>
-        );
-      })}
-    </div>
+    <>
+      <div className="d-flex flex-wrap justify-content-evenly">
+        {prods.map((prod) => {
+          return <Product key={prod.id} prod={prod} />;
+        })}
+      </div>
+      <h2>pagination</h2>
+    </>
   );
 };
 

@@ -4,9 +4,14 @@ import { Button } from "react-bootstrap";
 const Counter = () => {
   // useEffect
 
-  let c = Number(localStorage.getItem("count")) || 0;
   const [newsFeed, setNewsFeed] = useState("Test");
-  const [count, setCount] = useState(c);
+  const [count, setCount] = useState(0);
+
+  //props / state changes -> empty dependency array
+  useEffect(() => {
+    // console.log("news feed changed ");
+    console.log("first load");
+  }, []);
 
   const incrementCount = (e) => {
     e.preventDefault();
@@ -24,15 +29,24 @@ const Counter = () => {
     setCount(0);
   };
 
+  const changeNewsFeed = (e) => {
+    e.preventDefault();
+    setNewsFeed("kantipur");
+  };
+
   return (
     <div>
       <h1>{count}</h1>
+      <h1>{newsFeed}</h1>
       <Button onClick={incrementCount}>Increment</Button>
       <Button variant="secondary" onClick={decrementCount}>
         Decrement
       </Button>
       <Button variant="danger" onClick={resetCount}>
         Reset
+      </Button>
+      <Button variant="danger" onClick={changeNewsFeed}>
+        Change Feed
       </Button>
     </div>
   );
