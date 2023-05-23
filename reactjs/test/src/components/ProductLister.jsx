@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 
 import Product from "./Product";
-import { getData } from "../services/axios.service";
-import { PRODUCTS_URL } from "../constants/api.constants";
 
-const ProductLister = ({ prods }) => {
+const ProductLister = ({ prods, handleDeleteProduct, handleEditProduct }) => {
   return (
     <>
       <div className="d-flex flex-wrap justify-content-evenly">
-        {prods.map((prod) => {
-          return <Product key={prod.id} prod={prod} />;
-        })}
+        {prods &&
+          prods.length > 0 &&
+          prods.map((prod) => {
+            return (
+              <Product
+                key={prod.id}
+                prod={prod}
+                handleDeleteProduct={handleDeleteProduct}
+                handleEditProduct={handleEditProduct}
+              />
+            );
+          })}
       </div>
-      <h2>pagination</h2>
     </>
   );
 };

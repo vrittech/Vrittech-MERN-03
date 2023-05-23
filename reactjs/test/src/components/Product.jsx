@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import { Card } from "react-bootstrap";
 
-const Product = ({ prod }) => {
+const Product = ({ prod, handleDeleteProduct, handleEditProduct }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" className="h-50" src={prod.thumbnail} />
@@ -13,7 +13,16 @@ const Product = ({ prod }) => {
             ? prod.description.slice(0, 25) + "..."
             : prod.description}
         </Card.Text>
-        <Button variant="primary">Edit product</Button>
+        <Button variant="primary" onClick={handleEditProduct}>
+          Edit product
+        </Button>
+        <Button
+          variant="danger"
+          className="ms-1 "
+          onClick={(e) => handleDeleteProduct(e, prod.id)}
+        >
+          Delete product
+        </Button>
       </Card.Body>
     </Card>
   );
