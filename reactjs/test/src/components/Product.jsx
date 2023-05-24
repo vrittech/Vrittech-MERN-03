@@ -13,7 +13,7 @@ const Product = ({ prod, handleDeleteProduct, handleEditProduct }) => {
             ? prod.description.slice(0, 25) + "..."
             : prod.description}
         </Card.Text>
-        <Button variant="primary" onClick={handleEditProduct}>
+        <Button variant="primary" onClick={(e) => handleEditProduct(e, prod)}>
           Edit product
         </Button>
         <Button

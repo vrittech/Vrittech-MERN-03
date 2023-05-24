@@ -5,6 +5,7 @@ const Counter = () => {
   // useEffect
 
   const [newsFeed, setNewsFeed] = useState("Test");
+  const [productTitle, setProductTitle] = useState("");
   const [count, setCount] = useState(0);
 
   //props / state changes -> empty dependency array
@@ -34,9 +35,17 @@ const Counter = () => {
     setNewsFeed("kantipur");
   };
 
+  const changeHandler = (e) => {
+    setProductTitle(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log(productTitle);
+  };
+
   return (
     <div>
-      <h1>{count}</h1>
+      {/* <h1>{count}</h1>
       <h1>{newsFeed}</h1>
       <Button onClick={incrementCount}>Increment</Button>
       <Button variant="secondary" onClick={decrementCount}>
@@ -47,6 +56,17 @@ const Counter = () => {
       </Button>
       <Button variant="danger" onClick={changeNewsFeed}>
         Change Feed
+      </Button> */}
+      <label>Product name</label>
+      <input
+        className="form-control"
+        id="product-name"
+        name="prod-name"
+        placeholder="product name"
+        onChange={changeHandler}
+      />
+      <Button variant="primary" onClick={handleSubmit}>
+        Submit
       </Button>
     </div>
   );

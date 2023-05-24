@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Tab, Tabs } from "react-bootstrap";
+import { Tab, Tabs } from "react-bootstrap";
 import { getData } from "../services/axios.service";
 import ProductLister from "../components/ProductLister";
 import PostsLister from "./PostsLister";
 import UsersLister from "./UsersLister";
-import Modal from "react-bootstrap/Modal";
+import EditModal from "../components/EditModal";
 
 const TabComponentExample = () => {
   const [key, setKey] = useState("products");
@@ -15,6 +15,7 @@ const TabComponentExample = () => {
   const [prods, setProds] = useState([]);
   const [users, setusers] = useState([]);
   const [posts, setposts] = useState([]);
+  const [editProduct, setEditProduct] = useState({});
 
   // const [data, setData] = useState([]);
 
@@ -38,8 +39,59 @@ const TabComponentExample = () => {
     setProds(filteredProduct);
   };
 
-  const handleEditProduct = (e, id) => {
+  const handleEditProduct = (e, product) => {
+    e.preventDefault();
+    console.log(product);
+    setEditProduct(product);
     setShow(true);
+  };
+  //individually update state value in edit product
+  const handleTitleChange = (e) => {
+    setEditProduct({
+      title: e.target.value,
+    });
+  };
+  //individually update state value in edit product
+  const handleDescriptionChange = (e) => {
+    setEditProduct({
+      description: e.target.value,
+    });
+  };
+  //individually update state value in edit product
+  const handleThumbnailChange = (e) => {
+    setEditProduct({
+      thumbnail: e.target.value,
+    });
+  };
+  // let b = 10;
+  // let a = 10;
+  // let e = {
+  //   target: {
+  //     name: "title",
+  //     value: "10",
+  //   },
+  // };
+  // let test = {
+  //   [e.target.name]: e.target.value,
+  // };
+  // console.log(test);
+
+  //dynamically update state value in edit product
+  const handleChange = (e) => {
+    let updatedData = {
+      ...editProduct,
+      [e.target.name]: e.target.value,
+    };
+    setEditProduct(updatedData);
+  };
+
+  //save changes update button
+  const handleEditChanges = () => {
+    const updatedProd = prods.map((item) => {
+      return item.id === editProduct.id ? editProduct : item;
+    });
+    setProds(updatedProd);
+    setShow(false);
   };
 
   return (
@@ -62,28 +114,16 @@ const TabComponentExample = () => {
         </Tab>
       </Tabs>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <input className="form-control" placeholder="Product name" />
-          <input
-            className="form-control mt-3"
-            placeholder="Product description"
-          />
-          <input className="form-control mt-3" placeholder="Image url" />
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <EditModal
+        show={show}
+        handleClose={handleClose}
+        product={editProduct}
+        handleTitleChange={handleTitleChange}
+        handleDescriptionChange={handleDescriptionChange}
+        handleThumbnailChange={handleThumbnailChange}
+        handleChange={handleChange}
+        handleEditChanges={handleEditChanges}
+      />
     </>
   );
 };
