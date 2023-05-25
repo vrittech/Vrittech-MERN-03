@@ -5,10 +5,13 @@ import ProductLister from "../components/ProductLister";
 import PostsLister from "./PostsLister";
 import UsersLister from "./UsersLister";
 import EditModal from "../components/EditModal";
+import AddModal from "../components/AddModal";
 
 const TabComponentExample = () => {
   const [key, setKey] = useState("products");
   const [show, setShow] = useState(false);
+  //display add modal popup
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -16,6 +19,7 @@ const TabComponentExample = () => {
   const [users, setusers] = useState([]);
   const [posts, setposts] = useState([]);
   const [editProduct, setEditProduct] = useState({});
+  const [addProduct, setAddProduct] = useState({});
 
   // const [data, setData] = useState([]);
 
@@ -41,7 +45,6 @@ const TabComponentExample = () => {
 
   const handleEditProduct = (e, product) => {
     e.preventDefault();
-    console.log(product);
     setEditProduct(product);
     setShow(true);
   };
@@ -94,6 +97,33 @@ const TabComponentExample = () => {
     setShow(false);
   };
 
+  const handleAddModalShow = (e) => {
+    e.preventDefault();
+    setShowAddModal(true);
+  };
+
+  const handleAddModalClose = () => {
+    setShowAddModal(false);
+  };
+
+  const handleAddChange = (e) => {
+    let newProduct = {
+      ...addProduct,
+      [e.target.name]: e.target.value,
+      id: Math.random(),
+    };
+    setAddProduct(newProduct);
+  };
+
+  const handleSubmit = () => {
+    //add new product  beginning of the array
+    prods.unshift(addProduct);
+    //add new product  end of the array
+    // prods.push(addProduct);
+    setAddProduct(prods);
+    setShowAddModal(false);
+  };
+
   return (
     <>
       <Tabs activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
@@ -103,6 +133,7 @@ const TabComponentExample = () => {
               prods={prods}
               handleDeleteProduct={handleDeleteProduct}
               handleEditProduct={handleEditProduct}
+              handleAddModalShow={handleAddModalShow}
             />
           )}
         </Tab>
@@ -123,6 +154,13 @@ const TabComponentExample = () => {
         handleThumbnailChange={handleThumbnailChange}
         handleChange={handleChange}
         handleEditChanges={handleEditChanges}
+      />
+
+      <AddModal
+        show={showAddModal}
+        handleAddModalClose={handleAddModalClose}
+        handleAddChange={handleAddChange}
+        handleSubmit={handleSubmit}
       />
     </>
   );
