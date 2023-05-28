@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { getData } from "../services/axios.service";
 import ProductLister from "../components/ProductLister";
@@ -6,6 +6,11 @@ import PostsLister from "./PostsLister";
 import UsersLister from "./UsersLister";
 import EditModal from "../components/EditModal";
 import AddModal from "../components/AddModal";
+import TabComponentContext from "../context/TabComponentContext";
+
+// 1. Create context
+// 2. Context - Provider -(Data Provider)
+// 3. Consumer - (Data consume) - Child component
 
 const TabComponentExample = () => {
   const [key, setKey] = useState("products");
@@ -124,44 +129,52 @@ const TabComponentExample = () => {
     setShowAddModal(false);
   };
 
+  //useMemo
+  // --> data -> memoized -> cached
+  const memoizedValue = useMemo(
+    () => ({ prods, users, posts }),
+    [prods, users, posts]
+  );
+
   return (
     <>
-      <Tabs activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
-        <Tab eventKey="products" title="Products">
-          {key === "products" && (
-            <ProductLister
-              prods={prods}
-              handleDeleteProduct={handleDeleteProduct}
-              handleEditProduct={handleEditProduct}
-              handleAddModalShow={handleAddModalShow}
-            />
-          )}
-        </Tab>
-        <Tab eventKey="users" title="Users">
-          {key === "users" && <UsersLister users={users} />}
-        </Tab>
-        <Tab eventKey="posts" title="Posts">
-          {key === "posts" && <PostsLister posts={posts} />}
-        </Tab>
-      </Tabs>
+      <TabComponentContext.Provider value={memoizedValue}>
+        <Tabs activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
+          <Tab eventKey="products" title="Products">
+            {key === "products" && (
+              <ProductLister
+                handleDeleteProduct={handleDeleteProduct}
+                handleEditProduct={handleEditProduct}
+                handleAddModalShow={handleAddModalShow}
+              />
+            )}
+          </Tab>
+          <Tab eventKey="users" title="Users">
+            {key === "users" && <UsersLister users={users} />}
+          </Tab>
+          <Tab eventKey="posts" title="Posts">
+            {key === "posts" && <PostsLister posts={posts} />}
+          </Tab>
+        </Tabs>
 
-      <EditModal
-        show={show}
-        handleClose={handleClose}
-        product={editProduct}
-        handleTitleChange={handleTitleChange}
-        handleDescriptionChange={handleDescriptionChange}
-        handleThumbnailChange={handleThumbnailChange}
-        handleChange={handleChange}
-        handleEditChanges={handleEditChanges}
-      />
+        <EditModal
+          show={show}
+          handleClose={handleClose}
+          product={editProduct}
+          handleTitleChange={handleTitleChange}
+          handleDescriptionChange={handleDescriptionChange}
+          handleThumbnailChange={handleThumbnailChange}
+          handleChange={handleChange}
+          handleEditChanges={handleEditChanges}
+        />
 
-      <AddModal
-        show={showAddModal}
-        handleAddModalClose={handleAddModalClose}
-        handleAddChange={handleAddChange}
-        handleSubmit={handleSubmit}
-      />
+        <AddModal
+          show={showAddModal}
+          handleAddModalClose={handleAddModalClose}
+          handleAddChange={handleAddChange}
+          handleSubmit={handleSubmit}
+        />
+      </TabComponentContext.Provider>
     </>
   );
 };

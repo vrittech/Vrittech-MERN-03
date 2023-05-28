@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import { Card } from "react-bootstrap";
+import TabComponentContext from "../context/TabComponentContext";
 
 const Product = ({ prod, handleDeleteProduct, handleEditProduct }) => {
   return (

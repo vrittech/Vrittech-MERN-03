@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Product from "./Product";
+import TabComponentContext from "../context/TabComponentContext";
+
+//props drillings context api -global state management
+//props drillings @reduxjs/toolkit -global state management
 
 const ProductLister = ({
-  prods,
   handleDeleteProduct,
   handleEditProduct,
   handleAddModalShow,
 }) => {
+  const { prods } = useContext(TabComponentContext);
+
   return (
     <>
       <button
