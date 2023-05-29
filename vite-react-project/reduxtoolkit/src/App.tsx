@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import LoginPage from "./pages/LoginPage";
+import Counter from "./pages/Counter";
+// import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
     <>
-      {/* -> Login Page */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Counter />} />
         </Routes>
       </BrowserRouter>
     </>
