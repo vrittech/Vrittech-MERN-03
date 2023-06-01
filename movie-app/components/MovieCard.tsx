@@ -19,7 +19,7 @@ const MovieCard = ({
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
         <p className="text-gray-700 text-base mb-2">
-          Release Year: {releaseYear.split("-")}
+          Release Year: {releaseYear.split("-")[0]}
         </p>
         <p className="text-purple-400 text-base">Rating: {rating}</p>
       </div>

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: MovieInterface = {
   movies: [],
+  originalMovies: [],
 };
 
 const movieSlice = createSlice({
@@ -11,10 +12,14 @@ const movieSlice = createSlice({
   reducers: {
     setGlobalMovies: (state, data) => {
       state.movies = data.payload;
+      state.originalMovies = data.payload;
+    },
+    setFilteredMovies: (state, data) => {
+      state.movies = data.payload;
     },
   },
 });
 
-export const { setGlobalMovies } = movieSlice.actions;
+export const { setGlobalMovies, setFilteredMovies } = movieSlice.actions;
 
 export default movieSlice.reducer;

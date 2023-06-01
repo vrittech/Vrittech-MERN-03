@@ -6,6 +6,12 @@ export interface Movie {
     vote_average: number;
 }
 
+export interface AuthInterface {
+    isLoggedIn: boolean;
+    jwtToken: string;
+}
+
 export interface MovieInterface {
-    movies: Array<Movie>
+    movies: Array<Movie>;
+    originalMovies: Array<Movie>;
 }
