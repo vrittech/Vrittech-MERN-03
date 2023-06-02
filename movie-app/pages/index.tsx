@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
   // const [movies, setMovies] = useState<Movie[]>([]);
   //fetch state
   const { movies, originalMovies } = useSelector((state: any) => {
@@ -26,24 +27,45 @@ export default function Home() {
     }
   };
 
-  const searchResult = (searchQuery: string) => {
-    //local state way
-    const lowercaseResult = searchQuery.trim().toLowerCase();
-    const filteredResult = originalMovies.filter((movie: any) => {
-      return movie.title.toLowerCase().includes(lowercaseResult);
-    });
-    dispatch(setFilteredMovies(filteredResult));
+  // const searchResult = (searchQuery: string) => {
+  //local state way
+  // const lowercaseResult = searchQuery.trim().toLowerCase();
+  // const filteredResult = originalMovies.filter((movie: any) => {
+  //   return movie.title.toLowerCase().includes(lowercaseResult);
+  // });
+  // dispatch(setFilteredMovies(filteredResult));
+  // };
+
+  const searchResult = async () => {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?query=${searchQuery}`,
+      {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MzQ1ZDU5MWRjZTk5OWRkM2RkZTUyYThmZDdlMGY1NiIsInN1YiI6IjY0NzRkMDBlOWFlNjEzMDEyNTdjZWFhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dnyfwNlK0YqelPFjs1vB4AvSC0iXzNLjKNk8axPYU9M",
+        },
+      }
+    );
+    dispatch(setGlobalMovies(response.data.results));
   };
 
   useEffect(() => {
     fetchMovies();
   }, []);
 
+  useEffect(() => {
+    const debounceFN = setTimeout(() => {
+      searchResult();
+    }, 500);
+
+    return () => clearTimeout(debounceFN);
+  }, [searchQuery]);
+
   return (
     <>
       <input
         placeholder="Search movies here"
-        onChange={(e: any) => searchResult(e.target.value)}
+        onChange={(e: any) => setSearchQuery(e.target.value)}
       />
       <div className="container mx-auto py-8">
         <h1 className="text-2xl font-bold mb-4">Popular movies</h1>
