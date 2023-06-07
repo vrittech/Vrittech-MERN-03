@@ -9,11 +9,14 @@ import indexRouter from './routes/index.js'
 const app = express();
 
 app.set('view engine', 'ejs');
+//parse json and url encoded form data
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //templating engine - ejs/handlebars/pug
 
 app.use('/api/v1', indexRouter);
-
 
 const PORT = process.env.PORT || 8080;
 
