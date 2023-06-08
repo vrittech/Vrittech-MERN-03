@@ -1,10 +1,13 @@
 import express from 'express';
 import 'dotenv/config';
 import indexRouter from './routes/index.js'
+import { dbConnection } from './config/db.config.js';
 
 // same step as above
 // import dotenv from 'dotenv';
 // dotenv.config();
+
+dbConnection()
 
 const app = express();
 
