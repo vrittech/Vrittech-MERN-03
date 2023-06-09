@@ -1,51 +1,74 @@
-const users = ["Raaz", "Samrat", "Roshan"];
-export const getUsers = (req, res) => {
-   //find all users from database
-   res.status(200).json({
-      status: true,
-      data: users,
-      message: "USer fetched successfully"
-   })
-}
+import User from "../models/users.model.js";
 
-export const createUser = (req, res) => {
-   const { name } = req.body;
-   if (!name) {
+export const registerUser = async (req, res) => {
+   try {
+      const { name, email, password } = req.body;
+
+      const currUser = await User.findOne({ email });
+
+      if (!currUser) {
+
+         //bcrypt
+
+         const user = new User(req.body);
+         await user.save();
+
+         res.status(200).json({
+            status: true,
+            data: user,
+            message: 'Created successfully'
+         })
+      } else {
+         res.status(400).json({
+            status: false,
+            message: 'Email already registered'
+         })
+      }
+
+
+   } catch (error) {
       res.status(400).json({
          status: false,
-         message: "Name is required"
+         error: error.message
       })
-      return;
    }
-   users.push(name);
-   //save user in database logic
-
-   res.status(200).json({
-      status: true,
-      users,
-      message: "USer created successfully"
-   })
 }
 
-export const updateUser = (req, res) => {
-   const { id } = req.params;
-   const { name } = req.body;
+export const loginUser = async (req, res) => {
+   try {
+      const { email, password } = req.body;
 
-   res.status(200).json({
-      status: true,
-      users,
-      message: "USer updated successfully"
-   })
+      const user = await User.findOne({ email });
+
+      if (!user) {
+         return res.status(401).json({
+            status: false,
+            message: 'Invalid email or password'
+         })
+      } else {
+         const matchedPassword = await user.matchPassword(password);
+
+         if (matchedPassword) {
+
+            return res.status(200).json({
+               status: true,
+               data: 'jwt token',
+               message: 'User logged in successfully'
+            })
+         } else {
+            return res.status(401).json({
+               status: false,
+               message: 'Invalid email or password'
+            })
+         }
+      }
+
+
+   } catch (error) {
+      res.status(400).json({
+         status: false,
+         error: error.message
+      })
+   }
 }
 
-export const deleteUser = (req, res) => {
-   const { userId } = req.params;
-
-   delete users[userId];
-
-   res.status(200).json({
-      status: true,
-      users,
-      message: "USer deleted successfully"
-   })
-}

@@ -3,6 +3,10 @@ import 'dotenv/config';
 import indexRouter from './routes/index.js'
 import { dbConnection } from './config/db.config.js';
 
+//authentication-> user login -> user & principle
+// authorization-> role user -> correct resource -> access -> JWT
+
+
 // same step as above
 // import dotenv from 'dotenv';
 // dotenv.config();
