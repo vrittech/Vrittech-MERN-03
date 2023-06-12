@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 //Read
 export const getProducts = async (req, res) => {
    try {
-      const products = await Product.find();
+      const products = await Product.find().populate({
+         path: 'userId',
+         select: 'email -_id'
+      });
 
       if (products.length > 0) {
          res.status(200).json({
@@ -28,6 +31,7 @@ export const getProducts = async (req, res) => {
 //Create
 export const postProducts = async (req, res) => {
    try {
+      req.body.userId = req.user._id;
       const prods = new Product(req.body);
       await prods.save();
 

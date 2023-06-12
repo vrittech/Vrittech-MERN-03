@@ -29,6 +29,13 @@ const userSchema = mongoose.Schema({
       minLength: 5,
       maxLength: 15
    },
+   jwt: {
+      type: String
+   },
+   isAdmin: {
+      type: Boolean,
+      default: false
+   },
    address: addressSchema,
 }, {
    timestamps: true
@@ -37,7 +44,7 @@ const userSchema = mongoose.Schema({
 userSchema.pre('save', async function (next) {
    const salt = await bcrycpt.genSalt(10);
    this.password = await bcrycpt.hash(this.password, salt);
-   next();
+
 })
 
 userSchema.methods.matchPassword = async function (pass) {

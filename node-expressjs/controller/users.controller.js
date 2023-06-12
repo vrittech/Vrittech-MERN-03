@@ -1,4 +1,5 @@
 import User from "../models/users.model.js";
+import jwt from 'jsonwebtoken';
 
 export const registerUser = async (req, res) => {
    try {
@@ -49,10 +50,25 @@ export const loginUser = async (req, res) => {
          const matchedPassword = await user.matchPassword(password);
 
          if (matchedPassword) {
+            //1. create jwt token
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+            //access token
 
+            // 2. store jwt token on our end
+            const updatedUser = await User.findOneAndUpdate(
+               { _id: user._id }, {
+               $set: { jwt: token }
+            },
+               {
+                  new: true
+               }
+            )
+
+            // 3. return jwt token from our end
+            //client-> jwt token
             return res.status(200).json({
                status: true,
-               data: 'jwt token',
+               data: updatedUser.jwt,
                message: 'User logged in successfully'
             })
          } else {
