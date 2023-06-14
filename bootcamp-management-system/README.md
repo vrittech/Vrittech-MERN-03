@@ -1,5 +1,4 @@
 
-
 Bootcamps:
 - Retrieve a list of bootcamps from the database, allowing pagination, field selection, result limiting, and filtering by specific criteria.
 - Search for bootcamps.
@@ -11,12 +10,13 @@ Bootcamps:
 - Calculate and display the average cost of all courses offered by a bootcamp.
 - Calculate and display the average rating of reviews for a bootcamp.
 
+
 Courses:
 - List all courses associated with a specific bootcamp.
 - List all courses in general, with support for pagination, filtering, etc.
 - Retrieve information about a single course.
 - Only authenticated users with the "publisher" or "admin" role, or the owner of a bootcamp, can create new courses.
-- Allow the owner of a course to update its information.
+- Allow the owner of a course to update its information. 
 - Permit the owner of a course to delete it.
 
 Reviews:
@@ -56,9 +56,17 @@ TESTING
 CONTAINERIZING APPLICATION
 - Write docker file for backend, build a image and run it in a container mapping it to a PORT.
 
+
+CICD pipeline: 
+
 Deployment:
 - Push the project to a GitHub repository.
 - Utilize PM2 process manager for managing the application.
 - Enable the firewall (ufw) and open necessary ports.
 - Configure an NGINX reverse proxy for port 80.
+
+TECH_STACK:
+NODE_VERSION: v18.14.1
+MONGODB_VERSION: 6.0.1
+
 

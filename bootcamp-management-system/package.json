@@ -1,0 +1,20 @@
+{
+  "name": "bootcamp-management-system",
+  "version": "1.0.0",
+  "description": "Bootcamps:\r - Retrieve a list of bootcamps from the database, allowing pagination, field selection, result limiting, and filtering by specific criteria.\r - Search for bootcamps.\r - Fetch information about a single bootcamp.\r - Allow authenticated users with the \"publisher\" or \"admin\" role to create new bootcamps, with field validation and restrictions on the number of bootcamps per publisher.\r - Enable bootcamp owners to upload photos for their bootcamps.\r - Allow bootcamp owners to update their bootcamp information, with validation on the update.\r - Provide a mechanism for bootcamp owners to delete their bootcamps.\r - Calculate and display the average cost of all courses offered by a bootcamp.\r - Calculate and display the average rating of reviews for a bootcamp.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.4",
+    "nodemon": "^2.0.22"
+  }
+}

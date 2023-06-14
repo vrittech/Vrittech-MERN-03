@@ -9,6 +9,7 @@ const authMiddleware = async (req, res, next) => {
          const validatedData = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
          const user = await User.findOne({ _id: validatedData.id });
+
          req.user = user;
          next();
       } else {

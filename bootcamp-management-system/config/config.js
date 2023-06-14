@@ -1,0 +1,7 @@
+const config = {
+   PORT: process.env.PORT,
+   NODE_ENV: process.env.PORT,
+   MONGO_URI: process.env.MONGO_URI
+}
+
+export default config;
