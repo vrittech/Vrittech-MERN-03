@@ -3,9 +3,15 @@ import 'dotenv/config';
 import indexRouter from './routes/index.js'
 import config from './config/config.js';
 import { dbConnection } from './config/db.config.js';
+import morgan from 'morgan';
+import mongoSanitize from 'express-mongo-sanitize';
 
 const app = express();
 dbConnection();
+
+app.use(morgan('tiny'));
+app.use(express.json());
+app.use(mongoSanitize());
 
 app.use('/api/v1', indexRouter);
 
