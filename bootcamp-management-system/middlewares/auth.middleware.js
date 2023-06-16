@@ -23,3 +23,15 @@ export const authMiddleware = async (req, res, next) => {
    }
 }
 
+export const authorize = (...roles) => async (req, res, next) => {
+   if (roles.includes(req.user.role)) {
+      next();
+   } else {
+      res.status(401).json({
+         satus: false,
+         message: 'You are not a authorized user to access this resources'
+      })
+   }
+
+}
+
