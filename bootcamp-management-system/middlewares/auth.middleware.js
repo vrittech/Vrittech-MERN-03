@@ -28,7 +28,7 @@ export const authorize = (...roles) => async (req, res, next) => {
       next();
    } else {
       res.status(401).json({
-         satus: false,
+         status: false,
          message: 'You are not a authorized user to access this resources'
       })
    }

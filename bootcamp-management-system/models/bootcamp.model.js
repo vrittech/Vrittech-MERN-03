@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { validationMessage } from '../constants/validationMessage.constants';
+import { validationMessage } from '../constants/validationMessage.constants.js';
+import slugify from 'slugify';
 
 const bootcampSchema = mongoose.Schema({
    name: {
@@ -9,14 +10,14 @@ const bootcampSchema = mongoose.Schema({
       trim: true,
       minlength: [5, validationMessage.MIN_LENGTH_MESSAGE]
    },
-   slug: string,
+   slug: String,
    desciption: {
       type: String,
       required: [true, validationMessage.REQUIRED_DESCRIPTION_MESSAGE],
       maxlength: [500, validationMessage.MAX_LENGTH_MESSAGE]
    },
    website: {
-      type: string,
+      type: String,
       match: [
          /https ?: \/\/ (www\.) ? [-a - zA - Z0 - 9@:%._\+~#=]{ 1, 256}\.[a-zA - Z0 - 9()]{ 1, 6 } \b([-a - zA - Z0 - 9()@:% _\+.~# ?&//=]*)/,
          validationMessage.VALID_WEBSITE_MESSAGE
@@ -40,7 +41,7 @@ const bootcampSchema = mongoose.Schema({
       required: [true, validationMessage.ADDRESS_REQUIRED_MESSAGE]
    },
    careers: {
-      //Array of strings
+      //Array of Strings
       type: [String],
       required: true,
       enum: [
@@ -79,6 +80,11 @@ const bootcampSchema = mongoose.Schema({
    }
 }, {
    timestamps: true
+})
+
+bootcampSchema.pre('save', function (next) {
+   this.slug = slugify(this.name.toLowerCase());
+   next();
 })
 
 const Bootcamp = mongoose.model('Bootcamp', bootcampSchema);
