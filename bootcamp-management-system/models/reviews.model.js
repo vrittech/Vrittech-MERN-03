@@ -22,7 +22,6 @@ const reviewsSchema = mongoose.Schema({
    bootcamp: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Bootcamp',
-      required: true
    },
    course: {
       type: mongoose.Schema.Types.ObjectId,
@@ -36,3 +35,7 @@ const reviewsSchema = mongoose.Schema({
 }, {
    timestamps: true
 })
+
+const Review = mongoose.model('Review', reviewsSchema);
+
+export default Review;

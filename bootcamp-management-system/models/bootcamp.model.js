@@ -65,6 +65,9 @@ const bootcampSchema = mongoose.Schema({
    photo: {
       type: String,
    },
+   photo_public_id: {
+      type: String,
+   },
    jobGuarantee: {
       type: Boolean,
       default: false
