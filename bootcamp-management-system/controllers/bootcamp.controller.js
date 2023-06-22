@@ -100,7 +100,7 @@ export const deleteBootcamp = async (req, res) => {
             message: 'No bootcamp found '
          })
       }
-      if (req.user._id === bootcamp.user) {
+      if (req.user._id.toString() === bootcamp.user.toString()) {
 
          const deletedBootcamp = await Bootcamp.findOneAndDelete({
             _id: id

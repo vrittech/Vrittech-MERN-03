@@ -1,5 +1,6 @@
 export const filteredResults = (Model) => async (req, res, next) => {
    try {
+
       const reqQuery = { ...req.query };
 
       //Fields to remove
@@ -46,9 +47,11 @@ export const filteredResults = (Model) => async (req, res, next) => {
       // -> 1 * 3 = 3
 
       appendFilterQuery = appendFilterQuery.skip(skipData).limit(limit);
-      const total = await Model.countDocuments();
+
 
       const Models = await appendFilterQuery;
+
+
 
       const pagination = {};
 
@@ -71,6 +74,7 @@ export const filteredResults = (Model) => async (req, res, next) => {
          res.filteredResults = {
             status: true,
             data: Models,
+            totalDataFetched: Models.length,
             pagination,
             total
          };

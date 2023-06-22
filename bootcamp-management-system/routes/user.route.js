@@ -4,6 +4,28 @@ import { authMiddleware, authorize } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /users/register:
+ *   post:
+ *     summary: Register a user.
+ *     requestBody:
+ *      content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name: 
+ *               type: string 
+ *             email: 
+ *               type: string 
+ *             password: 
+ *               type: string 
+ *           example:
+ *             name: Nirajan Kunwor 
+ *             email: nk@gmail.com
+ *             password: Test@gmail.com
+*/
 router.post('/register', register);
 router.post('/login', loginUser);
 
