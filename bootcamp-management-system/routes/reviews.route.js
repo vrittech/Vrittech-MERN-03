@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
    res.send('Hello Reviews')
 })
 
-router.post('/', authMiddleware, authorize('user,admin,publisher'), addReviews);
+router.post('/', authMiddleware, authorize('admin'), addReviews);
 
 router.patch('/:id?bootcampId=648fc6017b23ac9d024816e1', (req, res) => {
    const review = review.findOne('6493b0914898187555c27526');

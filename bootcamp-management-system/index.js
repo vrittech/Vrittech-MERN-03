@@ -5,6 +5,11 @@ import config from './config/config.js';
 import { dbConnection } from './config/db.config.js';
 import morgan from 'morgan';
 import mongoSanitize from 'express-mongo-sanitize';
+import helmet from "helmet";
+import * as xss from 'xss';
+import hpp from 'hpp';
+// const { xss } = pkg;
+
 
 const app = express();
 dbConnection();
@@ -12,6 +17,14 @@ dbConnection();
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use(mongoSanitize());
+
+//Set security headers
+app.use(helmet());
+//Prevent cross side scripting
+// app.use(xss());
+
+//prevent html parameter pollution
+app.use(hpp());
 
 app.use('/api/v1', indexRouter);
 

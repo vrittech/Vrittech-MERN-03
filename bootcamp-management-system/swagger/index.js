@@ -24,7 +24,6 @@ const options = {
          bearerAuth: []
       }]
    },
-
    apis: ['routes/*.js'], // files containing annotations as above
 };
 

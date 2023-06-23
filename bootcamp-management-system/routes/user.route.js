@@ -9,6 +9,7 @@ const router = express.Router();
  * /users/register:
  *   post:
  *     summary: Register a user.
+ *     tags: [User]
  *     requestBody:
  *      content:
  *       application/json:
@@ -24,9 +25,40 @@ const router = express.Router();
  *           example:
  *             name: Nirajan Kunwor 
  *             email: nk@gmail.com
- *             password: Test@gmail.com
+ *             password: Test1234
+ *     responses:
+ *       200:
+ *         description: User Created Successfully
+ *       400:
+ *         description: User not found
 */
 router.post('/register', register);
+
+/**
+ * @swagger
+ * /users/login:
+ *   post:
+ *     summary: Login a user.
+ *     tags: [User]
+ *     requestBody:
+ *      content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             email: 
+ *               type: string 
+ *             password: 
+ *               type: string 
+ *           example:
+ *             email: test@yahoo.com
+ *             password: Hello1234
+ *     responses:
+ *       200:
+ *         description: User login Successfully
+ *       400:
+ *         description: Invalid email or password
+*/
 router.post('/login', loginUser);
 
 //user logout

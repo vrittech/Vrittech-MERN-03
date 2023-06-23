@@ -8,6 +8,8 @@ export const register = async (req, res) => {
    try {
       const { email } = req.body;
 
+
+
       const currUser = await User.findOne({ email });
 
       if (!currUser) {

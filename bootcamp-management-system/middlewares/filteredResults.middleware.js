@@ -48,7 +48,7 @@ export const filteredResults = (Model) => async (req, res, next) => {
 
       appendFilterQuery = appendFilterQuery.skip(skipData).limit(limit);
 
-
+      const total = await Model.countDocuments();
       const Models = await appendFilterQuery;
 
 
