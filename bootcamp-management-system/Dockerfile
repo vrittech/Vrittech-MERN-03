@@ -10,8 +10,10 @@ COPY package*.json ./
 
 RUN npm install --silent
 
+RUN npm install -g pnpm
+
 COPY . .
 
 EXPOSE 8082
 
-CMD ["npm","start"]
+CMD ["pnpm","start"]

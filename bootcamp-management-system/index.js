@@ -6,15 +6,15 @@ import { dbConnection } from './config/db.config.js';
 import morgan from 'morgan';
 import mongoSanitize from 'express-mongo-sanitize';
 import helmet from "helmet";
-import * as xss from 'xss';
+
 import hpp from 'hpp';
-// const { xss } = pkg;
+
 
 
 const app = express();
 dbConnection();
 
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(mongoSanitize());
 
