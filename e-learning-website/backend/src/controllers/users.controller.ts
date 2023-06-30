@@ -36,7 +36,7 @@ export const signin = async (req: Request, res: Response) => {
 
         const user: any = await User.findOne({ email });
 
-        console.log(user)
+
 
         if (!user) {
             return res.status(401).json({
@@ -67,7 +67,10 @@ export const signin = async (req: Request, res: Response) => {
                 return res.status(200).json({
                     status: true,
                     message: 'User logged in successfully',
-                    data: updatedUser.jwt
+                    data: {
+                        jwt: updatedUser.jwt,
+                        role: updatedUser.roles
+                    }
                 })
             } else {
                 return res.status(401).json({

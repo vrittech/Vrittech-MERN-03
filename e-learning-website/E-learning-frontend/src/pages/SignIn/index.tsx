@@ -13,17 +13,36 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SignInWithGoogle from "../../components/SignInWithGoogl";
-
+import { postData } from "../../services/axios.service";
+import { useNavigate } from "react-router-dom";
+import { errorToast, successToast } from "../../services/toastify.service";
+import { useDispatch } from "react-redux";
+import { login } from "./authSlice";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
 
-    console.log(email, password);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = {
+      email,
+      password,
+    };
+
+    const response = await postData("users/login", data);
+
+    if (response.status) {
+      dispatch(login(response.data));
+      navigate("/dashboard");
+      successToast(response.message);
+    } else {
+      errorToast(response.message);
+    }
   };
 
   return (
