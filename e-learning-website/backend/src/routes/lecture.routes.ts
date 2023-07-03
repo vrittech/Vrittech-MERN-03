@@ -1,11 +1,11 @@
 import express from 'express';
-import { createCourses } from '../controllers/courses.controller';
 import { upload } from '../middlewares/multer.middleware';
 import { authorize } from '../middlewares/auth.middleware';
+import { createLecture } from '../controllers/lecture.controller';
 
 
 const router = express.Router();
 
-router.post('/', authorize('instructor', 'admin') as any, upload.single('photo'), createCourses)
+router.post('/', upload.single('video'), createLecture)
 
 export default router;
