@@ -6,6 +6,6 @@ import { authorize } from '../middlewares/auth.middleware';
 
 const router = express.Router();
 
-router.post('/', authorize('instructor', 'admin') as any, upload.single('photo'), createCourses)
+router.post('/', upload.array('photo', 12), createCourses)
 
 export default router;

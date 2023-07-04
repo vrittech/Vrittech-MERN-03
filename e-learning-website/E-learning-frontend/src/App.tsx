@@ -5,6 +5,10 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
 import Sidebar from "./components/Sidebar";
+import Lectures from "./pages/Lectures";
+import Courses from "./pages/Courses";
+import LectureForm from "./components/forms/AddLectureForm";
+import AddCourseForm from "./components/forms/AddCourseForm";
 
 function App() {
   return (
@@ -14,6 +18,10 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Sidebar />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/lecture" element={<Lectures />} />
+          <Route path="/lecture/add" element={<LectureForm />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/add" element={<AddCourseForm />} />
         </Route>
       </Routes>
       <ToastContainer />
