@@ -1,6 +1,10 @@
 import { mixed, number, object, string } from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { postData } from "../../../services/axios.service";
+import { postDataWithJWT } from "../../../services/axios.service";
+
+import { successToast } from "../../../services/toastify.service";
+import { useNavigate } from "react-router-dom";
+import { getJWTToken } from "../../../utils/helper";
 
 const LectureForm = () => {
   const initialValues = {
@@ -9,6 +13,8 @@ const LectureForm = () => {
     duration: "",
     file: null,
   };
+  const navigate = useNavigate();
+  const token = getJWTToken();
 
   const lectureValidationSchema = object().shape({
     title: string().required("Title is required"),
@@ -19,7 +25,19 @@ const LectureForm = () => {
 
   const handleSubmit = async (values: any, { setSubmitting }: any) => {
     try {
-      const response = await postData("lectures", values);
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("content", values.content);
+      formData.append("duration", values.duration);
+      formData.append("video", values.file);
+
+      const response = await postDataWithJWT("lectures", formData, token);
+
+      if (response.status) {
+        successToast(response.message);
+        navigate("/lecture");
+      }
+
       //write all logics above here
       setSubmitting(false);
     } catch (error) {
@@ -35,7 +53,7 @@ const LectureForm = () => {
         validationSchema={lectureValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }: any) => {
+        {({ isSubmitting, setFieldValue }: any) => {
           return (
             <Form>
               <div className="mb-4">
@@ -90,7 +108,15 @@ const LectureForm = () => {
                 <label htmlFor="file" className="block mb-2">
                   File
                 </label>
-                <Field type="file" id="file" name="file" className="w-full" />
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  className="w-full"
+                  onChange={(e: any) => {
+                    setFieldValue("file", e.currentTarget.files[0]);
+                  }}
+                />
                 <ErrorMessage
                   name="file"
                   component="div"

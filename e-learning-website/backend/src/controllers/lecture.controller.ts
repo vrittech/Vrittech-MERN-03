@@ -35,3 +35,17 @@ export const createLecture = async (req: any, res: any) => {
         })
     }
 }
+
+export const getLecture = async (req: any, res: any) => {
+    try {
+        const lectures = await Lecture.find({});
+
+        res.status(200).json({
+            status: true,
+            message: 'Lecture fetched successfully',
+            data: lectures
+        })
+    } catch (error) {
+
+    }
+}
