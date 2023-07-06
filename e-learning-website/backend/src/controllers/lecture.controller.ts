@@ -49,3 +49,38 @@ export const getLecture = async (req: any, res: any) => {
 
     }
 }
+
+export const editLecture = async (req: any, res: any) => {
+    try {
+        const id = req.params.id;
+
+        const { isVideoEdited, title, content, duration } = req.body;
+        const lecture = await Lecture.findById(id);
+        let updatedLecture;
+        console.log(lecture)
+        if (!lecture) { }
+        else {
+            if (isVideoEdited) {
+
+            } else {
+                updatedLecture = await Lecture.findOneAndUpdate({ _id: id }, {
+                    $set: {
+                        title,
+                        content,
+                        duration
+                    }
+                }, {
+                    new: true
+                })
+                return res.status(200).json({
+                    status: true,
+                    message: 'Edited succes',
+                    data: updatedLecture
+                })
+            }
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+}
