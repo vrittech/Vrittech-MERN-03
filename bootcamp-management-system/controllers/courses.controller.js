@@ -31,3 +31,11 @@ export const addCourse = async (req, res) => {
       console.log(error);
    }
 }
+
+export const getCourse = async (req, res) => {
+   try {
+
+   } catch (e) {
+
+   }
+}

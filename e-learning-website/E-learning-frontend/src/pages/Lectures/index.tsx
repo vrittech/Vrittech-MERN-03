@@ -19,7 +19,7 @@ const Lectures = () => {
 
   const getLectureData = async () => {
     const response = await getData("lectures", token);
-    console.log(response);
+
     if (response.status) {
       setLectures(response.data);
     }
@@ -29,6 +29,10 @@ const Lectures = () => {
     getLectureData();
   }, []);
 
+  const editLecture = (id: any) => {
+    navigate(`/lecture/${id}`);
+  };
+
   const deleteLecture = async (id: any) => {
     const response = await deleteData(`lectures/${id}`, token);
 
@@ -37,7 +41,7 @@ const Lectures = () => {
         return lec._id !== id;
       });
       setLectures(data);
-      successToast(response.data.message);
+      successToast(response.message);
     } else {
       errorToast(response.data.message);
     }
@@ -63,7 +67,7 @@ const Lectures = () => {
                     <Typography variant="h6">{lecture.title}</Typography>
                     <div>
                       <IconButton color="primary" className="mr-2">
-                        <EditIcon />
+                        <EditIcon onClick={() => editLecture(lecture._id)} />
                       </IconButton>
                       <IconButton
                         color="error"

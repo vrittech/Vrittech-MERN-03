@@ -293,7 +293,7 @@ const AddCourseForm = () => {
                                 >
                                   Lecture File
                                 </label>
-                                <Field
+                                <input
                                   type="file"
                                   id={`sections[${sectionIndex}].lectures[${lectureIndex}].file`}
                                   name={`sections[${sectionIndex}].lectures[${lectureIndex}].file`}

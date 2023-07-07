@@ -40,28 +40,35 @@ export const createCourses = async (req: any, res: Response) => {
                         content: lectureData.content,
                         duration: lectureData.duration,
                     })
-                    let result;
-                    for (let file of req.files) {
-                        if (file.mimetype === 'image/jpeg'
-                            || file.mimetype === 'image/png'
-                            || file.mimetype === 'image/jpg') {
-                            result = await cloudinary.v2.uploader.upload(file.path);
-
-                        } else {
-                            result = await cloudinary.v2.uploader.upload(file.path, {
-                                resource_type: 'video',
-                                folder: 'videos'
-                            });
-                        }
-                        lecture.lectureUrl = result.secure_url;
-                        await lecture.save();
-                    }
-
-
 
                     section.lectures.push(lecture._id);
+                    await lecture.save();
 
                 }
+                let results = [];
+                for (let file of req.files) {
+                    let result;
+                    if (file.mimetype === 'image/jpeg'
+                        || file.mimetype === 'image/png'
+                        || file.mimetype === 'image/jpg') {
+                        result = await cloudinary.v2.uploader.upload(file.path);
+
+                    } else {
+                        result = await cloudinary.v2.uploader.upload(file.path, {
+                            resource_type: 'video',
+                            folder: 'videos'
+                        });
+                    }
+                    results.push(result);
+                }
+                let resultIndex = 0;
+                for (let lectureId of section.lectures) {
+                    const lecture: any = await Lecture.findById(lectureId);
+                    lecture.lectureUrl = results[resultIndex].secure_url;
+                    await lecture.save();
+                    resultIndex++;
+                }
+
                 await section.save();
 
                 course.sections.push(section._id);
@@ -173,5 +180,19 @@ export const editCourses = async (req: any, res: Response) => {
             message: 'An error occured while creating this course',
             error
         })
+    }
+}
+
+export const getCourses = async (req: any, res: Response) => {
+    try {
+        const courses = await Course.find({}).populate("instructorId");
+
+        return res.status(200).json({
+            status: true,
+            message: 'Courses fetched',
+            data: courses
+        })
+    } catch (error) {
+
     }
 }
