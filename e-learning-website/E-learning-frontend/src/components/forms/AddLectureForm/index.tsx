@@ -53,7 +53,7 @@ const LectureForm = () => {
         validationSchema={lectureValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, setFieldValue }: any) => {
+        {({ values, isSubmitting, setFieldValue }: any) => {
           return (
             <Form>
               <div className="mb-4">

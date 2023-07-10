@@ -53,3 +53,16 @@ export const postDataWithJWT = async (url: string, data: any, jwt: string) => {
         errorToast(error.response.data.message)
     }
 }
+
+export const updateData = async (url: string, data: any, jwt: string) => {
+    try {
+        const response = await axios.patch(`${serverURL}/${url}`, data, {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        });
+        return response.data;
+    } catch (error: any) {
+        errorToast(error.response.data.message)
+    }
+}

@@ -10,6 +10,8 @@ import Courses from "./pages/Courses";
 import LectureForm from "./components/forms/AddLectureForm";
 import AddCourseForm from "./components/forms/AddCourseForm";
 import LectureEditForm from "./components/forms/EditLectureForm";
+import SecureRoute from "./routes/SecureRoute";
+import UnmatchedRoute from "./pages/UnmatchedRoute";
 
 function App() {
   return (
@@ -17,14 +19,17 @@ function App() {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<Sidebar />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/lecture" element={<Lectures />} />
-          <Route path="/lecture/add" element={<LectureForm />} />
-          <Route path="/lecture/:id" element={<LectureEditForm />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/add" element={<AddCourseForm />} />
+        <Route path="/" element={<SecureRoute />}>
+          <Route path="/" element={<Sidebar />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/lecture" element={<Lectures />} />
+            <Route path="/lecture/add" element={<LectureForm />} />
+            <Route path="/lecture/:id" element={<LectureEditForm />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/add" element={<AddCourseForm />} />
+          </Route>
         </Route>
+        <Route path="*" element={<UnmatchedRoute />} />
       </Routes>
       <ToastContainer />
     </>

@@ -118,7 +118,6 @@ export const editCourses = async (req: any, res: Response) => {
 
         if (sections.length > 0) {
             for (let sectionData of sections) {
-
                 const section = new Section({
                     title: sectionData.title,
                     lectures: []
@@ -194,5 +193,33 @@ export const getCourses = async (req: any, res: Response) => {
         })
     } catch (error) {
 
+    }
+}
+
+export const deleteCourse = async (req: any, res: Response) => {
+    try {
+        const id = req.params.id;
+        //use cloudinary destroy method
+        const course = await Course.findById(id);
+        if (!course) {
+            res.send('Not found course');
+        } else {
+            const sections = await Section.find({ _id: { $in: course.sections } })
+            Promise.all(sections.map(async (section) => {
+                await Lecture.deleteMany({ _id: { $in: section.lectures } })
+
+            }))
+
+            await Section.deleteMany({ _id: { $in: course.sections } });
+
+            await Course.findOneAndDelete({ _id: id })
+
+            res.status(200).json({
+                status: true,
+                message: 'Course deleted successfully'
+            })
+        }
+    } catch (error) {
+        console.log(error)
     }
 }

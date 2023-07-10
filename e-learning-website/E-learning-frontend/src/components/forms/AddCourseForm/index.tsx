@@ -2,6 +2,10 @@ import { Stepper, Step, StepLabel, Button } from "@mui/material";
 import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import { postDataWithJWT } from "../../../services/axios.service";
+import { getJWTToken } from "../../../utils/helper";
+import { useNavigate } from "react-router-dom";
+import { successToast } from "../../../services/toastify.service";
 
 const steps = ["Course Details", "Sections and Lectures"];
 
@@ -55,10 +59,44 @@ const AddCourseForm = () => {
   const handlePreviousStep = () => {
     setActiveStep((prevStep) => prevStep - 1);
   };
+
+  const navigate = useNavigate();
+
+  const token = getJWTToken();
   const handleFormSubmit = async (values: any) => {
     try {
       // Perform API call to submit the form data
-      console.log(values);
+      const formdata = new FormData();
+      formdata.append("title", values.title);
+      formdata.append("description", values.description);
+      formdata.append("price", values.price);
+      formdata.append("duration", values.duration);
+
+      values.sections.forEach((section: any, sectionIndex: number) => {
+        formdata.append(`sections[${sectionIndex}][title]`, section.title);
+        section.lectures.forEach((lecture: any, lectureIndex: number) => {
+          formdata.append(
+            `sections[${sectionIndex}][lectures][${lectureIndex}][title]`,
+            lecture.title
+          );
+          formdata.append(
+            `sections[${sectionIndex}][lectures][${lectureIndex}][content]`,
+            lecture.content
+          );
+          formdata.append(
+            `sections[${sectionIndex}][lectures][${lectureIndex}][duration]`,
+            lecture.duration
+          );
+          formdata.append(`photo`, lecture.file);
+        });
+      });
+
+      const response = await postDataWithJWT("courses", formdata, token);
+
+      if (response.status) {
+        navigate("/courses");
+        successToast(response.message);
+      }
     } catch (error) {
       console.error("An error occurred while submitting the form", error);
     }
