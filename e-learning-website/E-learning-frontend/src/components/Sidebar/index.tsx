@@ -19,6 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -95,6 +96,22 @@ export default function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const { role } = useSelector((state: any) => state.auth);
+
+  const [sidebarValues, setSidebarValues] = React.useState([
+    "Dashboard",
+    "Courses",
+    "Section",
+    "Lecture",
+    "Order",
+  ]);
+
+  React.useEffect(() => {
+    if (role === "student") {
+      setSidebarValues(["Dashboard", "Courses"]);
+    }
+  }, [role]);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -139,8 +156,8 @@ export default function Sidebar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Home", "Courses", "Section", "Lecture", "Order"].map(
-            (text, index) => (
+          {sidebarValues.map((text, index) => {
+            return (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   onClick={(e) => navigate(`${text.toLowerCase()}`)}
@@ -166,8 +183,8 @@ export default function Sidebar() {
                   />
                 </ListItemButton>
               </ListItem>
-            )
-          )}
+            );
+          })}
         </List>
         <Divider />
         <List>

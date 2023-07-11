@@ -12,6 +12,9 @@ import AddCourseForm from "./components/forms/AddCourseForm";
 import LectureEditForm from "./components/forms/EditLectureForm";
 import SecureRoute from "./routes/SecureRoute";
 import UnmatchedRoute from "./pages/UnmatchedRoute";
+import AccessDenied from "./pages/AccessDenied";
+import PrivateRoute from "./routes/PrivateRoute";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -22,13 +25,18 @@ function App() {
         <Route path="/" element={<SecureRoute />}>
           <Route path="/" element={<Sidebar />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/lecture" element={<Lectures />} />
-            <Route path="/lecture/add" element={<LectureForm />} />
-            <Route path="/lecture/:id" element={<LectureEditForm />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/lecture" element={<Lectures />} />
+              <Route path="/lecture/add" element={<LectureForm />} />
+              <Route path="/lecture/:id" element={<LectureEditForm />} />
+              <Route path="/courses/add" element={<AddCourseForm />} />
+            </Route>
             <Route path="/courses" element={<Courses />} />
-            <Route path="/courses/add" element={<AddCourseForm />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/access-denied" element={<AccessDenied />} />
           </Route>
         </Route>
+
         <Route path="*" element={<UnmatchedRoute />} />
       </Routes>
       <ToastContainer />
