@@ -15,6 +15,7 @@ import UnmatchedRoute from "./pages/UnmatchedRoute";
 import AccessDenied from "./pages/AccessDenied";
 import PrivateRoute from "./routes/PrivateRoute";
 import Cart from "./pages/Cart";
+import SuccessPage from "./pages/SuccessPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             </Route>
             <Route path="/courses" element={<Courses />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/success" element={<SuccessPage />} />
             <Route path="/access-denied" element={<AccessDenied />} />
           </Route>
         </Route>

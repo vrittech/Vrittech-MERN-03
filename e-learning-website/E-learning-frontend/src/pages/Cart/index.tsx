@@ -1,10 +1,38 @@
 import { Card } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import PayButton from "./PayButton";
+import {
+  addToCart,
+  clearCart,
+  decreaseCart,
+  getTotals,
+  removeFromCart,
+} from "./cartSlice";
+import { useEffect } from "react";
 
 const Cart = () => {
   const cart = useSelector((state: any) => state.cart);
-  console.log(cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [dispatch, cart]);
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  const handleAddToCart = (course: any) => {
+    dispatch(addToCart(course));
+  };
+  const handleDecreaseCart = (course: any) => {
+    dispatch(decreaseCart(course));
+  };
+  const handleRemoveCart = (course: any) => {
+    dispatch(removeFromCart(course));
+  };
+
   return (
     <div className="cart-container">
       <h2>Shopping cart</h2>
@@ -43,25 +71,43 @@ const Cart = () => {
             <h3 className="">Total</h3>
           </div>
           <div className="cart-items">
-            {cart.cartItems.length > 0 &&
+            {cart?.cartItems?.length > 0 &&
               cart.cartItems.map((cartItem: any) => {
                 return (
                   <div className="cart-item" key={cartItem._id}>
                     <div className="">
                       <h3>{cartItem.title}</h3>
                       <h3>{cartItem.description}</h3>
-                      <button>Remove</button>
+                      <button onClick={() => handleRemoveCart(cartItem)}>
+                        Remove
+                      </button>
                     </div>
                     <div className="card-product-price">${cartItem.price}</div>
                     <div className="card-product-quantity">
-                      <button>-</button>
+                      <button onClick={() => handleDecreaseCart(cartItem)}>
+                        -
+                      </button>
                       <div className="count">{cartItem.cartQuantity}</div>
-                      <button>+</button>
+                      <button onClick={() => handleAddToCart(cartItem)}>
+                        +
+                      </button>
                     </div>
                     <div>${cartItem.cartQuantity * cartItem.price}</div>
                   </div>
                 );
               })}
+          </div>
+          <div className="cart-summary">
+            <button className="clear-btn" onClick={() => handleClearCart()}>
+              Clear cart
+            </button>
+            <div className="cart-checkout">
+              <div className="subtotal">
+                <span>SubTotal</span>
+                <span className="amout">${cart.cartTotalAmount}</span>
+              </div>
+              <PayButton cartItems={cart.cartItems} />
+            </div>
           </div>
         </div>
       )}

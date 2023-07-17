@@ -10,27 +10,37 @@ const URL = process.env.FRONTEND_URL;
 const router = express.Router();
 
 router.post('/create-checkout-session', async (req, res) => {
-    const session = await stripe.checkout.sessions.create({
-        line_items: [
-            {
-                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: 'Frontend web development'
-                    },
-                    unit_amount: 2000
+
+    const line_items = req.body.cartItems.map((item: any) => {
+        return {
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: item.title,
+                    description: item.description,
+                    metadata: {
+                        id: item._id
+                    }
                 },
-                quantity: 1,
+                unit_amount: item.price * 100,
+
             },
-        ],
+            quantity: item.cartQuantity
+        }
+    })
+
+    const session = await stripe.checkout.sessions.create({
+        line_items,
         mode: 'payment',
-        success_url: `${URL}/cart/success`,
+        success_url: `${URL}/success`,
         cancel_url: `${URL}/cart`,
     });
-    res.send({
-        data: session.id
-    })
+    if (session) {
+        res.status(200).json({
+            success: true,
+            data: session.url
+        })
+    }
 
 
 });
