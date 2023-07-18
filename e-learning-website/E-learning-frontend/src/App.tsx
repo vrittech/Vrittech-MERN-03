@@ -16,6 +16,7 @@ import AccessDenied from "./pages/AccessDenied";
 import PrivateRoute from "./routes/PrivateRoute";
 import Cart from "./pages/Cart";
 import SuccessPage from "./pages/SuccessPage";
+import Inbox from "./pages/Inbox";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             </Route>
             <Route path="/courses" element={<Courses />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/inbox" element={<Inbox />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/access-denied" element={<AccessDenied />} />
           </Route>
