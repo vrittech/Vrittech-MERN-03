@@ -5,6 +5,8 @@ import Section from "../models/section.model";
 import Lecture from "../models/lectures.model";
 import cloudinary from "../config/cloudinary.config";
 import fs from 'fs';
+import User from "../models/users.model";
+import sendNotification from "../firebase/sendNotification";
 
 export const createCourses = async (req: any, res: Response) => {
     const { title, description, price, duration, sections, categories, content } = req.body;
@@ -82,6 +84,14 @@ export const createCourses = async (req: any, res: Response) => {
                 }
             }
         }
+
+        const users = await User.find({ roles: 'student' });
+        users.forEach((user) => {
+            if (user.fcm) {
+                console.log(user)
+                sendNotification(user.fcm, `There is a new course available ${course.title}. Please check you app to add to cart.`)
+            }
+        })
 
         return res.status(201).json({
             status: true,

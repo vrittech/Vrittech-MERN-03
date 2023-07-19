@@ -8,6 +8,8 @@ import { passportInitialize } from './middlewares/passport.middleware';
 import cors from 'cors';
 import { Server, Server as SocketIOServer } from 'socket.io';
 import http from 'http';
+import initializeFirebaseApp from './firebase/initializeFirebase';
+
 
 const app = express();
 app.use(cors());
@@ -24,6 +26,7 @@ const io: SocketIOServer = new Server(server, {
 dbConnection();
 
 
+initializeFirebaseApp()
 
 app.use(expressSession({
     secret: 'test123#',

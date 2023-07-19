@@ -32,7 +32,7 @@ export const signup = async (req: Request, res: Response) => {
 
 export const signin = async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, fcm } = req.body;
 
         const user: any = await User.findOne({ email });
 
@@ -57,7 +57,8 @@ export const signin = async (req: Request, res: Response) => {
                 },
                     {
                         $set: {
-                            jwt: token
+                            jwt: token,
+                            fcm
                         }
                     },
                     {
@@ -80,6 +81,18 @@ export const signin = async (req: Request, res: Response) => {
             }
         }
 
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getInfo = async (req: Request, res: Response) => {
+    try {
+        res.status(200).json({
+            status: true,
+            data: req.user
+        });
 
     } catch (error) {
         console.log(error)

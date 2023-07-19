@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { errorToast, successToast } from "../../services/toastify.service";
 import { useDispatch } from "react-redux";
 import { login } from "./authSlice";
+import { getToken } from "firebase/messaging";
+import messaging from "../../config/firebase.config";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
@@ -29,9 +31,14 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const token = await getToken(messaging, {
+      vapidKey: import.meta.env.VITE_FIREBASE_VALID_KEY,
+    });
+
     const data = {
       email,
       password,
+      fcm: token,
     };
 
     const response = await postData("users/login", data);
